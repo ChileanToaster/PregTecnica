@@ -7,6 +7,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 class Command(BaseCommand):
     help = 'Carga el historial de precios de activos em un archivo Excel con formato establecido a la base de datos. Además, crea los portafolios'
+    output_transaction = True
 
     def add_arguments(self, parser):
         parser.add_argument('--archivo', type=str, help='Opcional, se usa cargar_datos/datos/datos.xlsx por defecto. Ruta del archivo Excel (.xlsx) a cargar')
