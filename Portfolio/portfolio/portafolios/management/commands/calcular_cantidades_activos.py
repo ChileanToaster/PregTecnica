@@ -78,3 +78,15 @@ class Command(BaseCommand):
                         activo_portafolio_create(portafolio=portafolio_db, activo=activo_db, cantidad=cantidad)
                     except Exception as e:
                         raise CommandError(f'Error al crear el par activo-portafolio {activo} - {portafolio}: {e}')
+
+        # Imprimir las cantidades de activos en cada portafolio
+        for portafolio in portafolios:
+            try:
+                portafolio_db = portafolio_get(portafolio)
+            except Exception as e:
+                raise CommandError(f'Error al obtener el portafolio {portafolio}: {e}')
+
+            activos_portafolio = ActivoPortafolio.objects.filter(portafolio=portafolio_db)
+            self.stdout.write(self.style.SUCCESS(f'\nPortafolio: {portafolio}\n'))
+            for activo_portafolio in activos_portafolio:
+                self.stdout.write(self.style.SUCCESS(f'Activo: {activo_portafolio.activo}, Cantidad: {activo_portafolio.cantidad}'))
