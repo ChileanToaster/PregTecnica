@@ -46,3 +46,6 @@ desktop.ini
 .idea/
 *.sublime-workspace
 *.sublime-project
+
+# Django migrations
+**/migrations/
