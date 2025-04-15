@@ -13,7 +13,7 @@ class Portafolio(models.Model):
 class ActivoPortafolio(models.Model):
     portafolio = models.ForeignKey(Portafolio, on_delete=models.CASCADE, related_name='activos')
     activo = models.ForeignKey('activos.Activo', on_delete=models.CASCADE, related_name='portafolios')
-    cantidad = models.DecimalField(max_digits=10, decimal_places=5)
+    cantidad = models.DecimalField(max_digits=18, decimal_places=5)
 
     def __str__(self):
         return f"{self.portafolio.nombre} - {self.activo.nombre} - {self.cantidad}"
