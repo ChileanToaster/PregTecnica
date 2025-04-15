@@ -65,3 +65,17 @@ def activo_portafolio_get_or_create(portafolio: Portafolio, activo: Activo, cant
         activo_portafolio = activo_portafolio_create(portafolio, activo, cantidad)
 
     return activo_portafolio
+
+def activo_portafolio_modify(portafolio: Portafolio, activo: Activo, nueva_cantidad: float) -> ActivoPortafolio:
+    """
+    Modifica la cantidad de un activo que posee un portafolio, si no existe el par activo-portafolio arroja error.
+    """
+    try:
+        activo_portafolio = activo_portafolio_get(portafolio=portafolio, activo=activo)
+        activo_portafolio.cantidad = nueva_cantidad
+        activo_portafolio.full_clean()
+        activo_portafolio.save()
+    except ActivoPortafolio.DoesNotExist:
+        raise ValueError(f'El activo {activo.nombre} no existe en el portafolio {portafolio.nombre}.')
+
+    return activo_portafolio
