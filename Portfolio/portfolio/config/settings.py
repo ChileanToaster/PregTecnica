@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'activos',
     'portafolios',
     'cargar_datos',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
