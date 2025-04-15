@@ -47,3 +47,17 @@ python ./manage.py cargar_datos_de_xlsx
 ## Pregunta 2: Decisiones
 
 - Tal como se señaló en [Pregunta 1: Decisiones](#pregunta-1-decisiones), se planea calcular el peso de un activo en un portafolio dinámicamente, por lo que la base de datos poblada solo tiene los dos portafolios, los 17 activos y sus historiales de precios. En la pregunta 3 se calculará la cantidad de un activo que posee cada portafolio y se terminará de poblar la base de datos.
+
+## Pregunta 3: Features
+
+- La función que calcula las cantidades para cada activo se encuentra en "/portafolios/management/commands/calcular_cantidades_activos.py", específicamente en el método 'handle'
+
+- Para ejecutar el comando y calcular las cantidades de cada activo por portafolio posicionarse en el directorio "/Portfolio/portfolio" y ejecutar en la linea de comandos
+
+```console
+python .\manage.py calcular_cantidades_activos 1000000000
+```
+
+- Notar que el comando recibe el valor inicial a usar, que es global para los portafolios. Además, recibe opcionalmente la ruta al archivo excel a usar para ver los pesos, usando datos.xlsx por defecto. Este archivo debe seguir el mismo formato que el datos.xlsx dado.
+
+- Al terminar, el comando imprime cada portafolio y la cantidad de cada activo que posee.
