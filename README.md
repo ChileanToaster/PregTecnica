@@ -61,3 +61,24 @@ python .\manage.py calcular_cantidades_activos 1000000000
 - Notar que el comando recibe el valor inicial a usar, que es global para los portafolios. Además, recibe opcionalmente la ruta al archivo excel a usar para ver los pesos, usando datos.xlsx por defecto. Este archivo debe seguir el mismo formato que el datos.xlsx dado.
 
 - Al terminar, el comando imprime cada portafolio y la cantidad de cada activo que posee.
+
+
+## Pregunta 4: Features
+
+- Se agregó un endpoint API REST en /api/ que recibe como parametros fecha_inicio y fecha_fin, y para cada portafolio entrega un listado del valor total y los pesos de los activos para todas las fechas entre fecha_inicio y fecha fin (inclusive). Opcionalmente recibe un id de portafolio, y solo entrega los resultados para el portafolio deseado.
+
+### Ejemplo de uso 1
+
+```
+/api/?fecha_inicio=2022-02-15&fecha_fin=2022-02-19
+```
+
+- Arroja el valor total y pesos de los activos de cada portafolio entre el 15/02/2022 y el 19/02/2022
+
+### Ejemplo de uso 2
+
+```
+/api/?fecha_inicio=2022-02-17&fecha_fin=2022-03-20&id_portafolio=2
+```
+
+- Arroja el valor total y pesos de los activos del portafolio 2 entre el 17/02/2022 y el 20/03/2022
