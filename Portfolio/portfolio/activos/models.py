@@ -13,7 +13,7 @@ class Activo(models.Model):
 class PrecioActivo(models.Model):
     activo = models.ForeignKey(Activo, on_delete=models.CASCADE, related_name='precios')
     fecha = models.DateField()
-    precio = models.DecimalField(max_digits=10, decimal_places=5)
+    precio = models.DecimalField(max_digits=10, decimal_places=6)
 
     def __str__(self):
         return f"{self.activo.nombre} - {self.fecha} - {self.precio}"
