@@ -11,11 +11,16 @@ from portafolios.utils import calc_valor_total
 def get_peso_and_valor_total(request):
     """
     Endpoint para obtener pesos de activos y valores totales de portafolios entre dos fechas.
-    Se espera recibir dos fechas en el formato YYYY-MM-DD como parámetros de consulta.
+
+    Parámetros:
+    - fecha_inicio : Fecha de inicio en formato YYYY-MM-DD
+    - fecha_fin : Fecha de fin en formato YYYY-MM-DD
+    - id_portafolio (opcional) : ID del portafolio para filtrar resultados
     """
 
     fecha_inicio = request.query_params.get('fecha_inicio')
     fecha_fin = request.query_params.get('fecha_fin')
+    id_portafolio = request.query_params.get('id_portafolio') # Opcional
 
     if not fecha_inicio or not fecha_fin:
         return Response({"error": "Se requieren las fechas de inicio y fin."}, status=400)
@@ -41,7 +46,14 @@ def get_peso_and_valor_total(request):
         fecha__range=[fecha_inicio, fecha_fin]
     ).order_by('fecha')
 
-    for portafolio in Portafolio.objects.all():
+    portafolios = Portafolio.objects.all()
+    if id_portafolio:
+        try:
+            portafolios = Portafolio.objects.filter(id=id_portafolio)
+        except Portafolio.DoesNotExist:
+            return Response({"error": "Portafolio no encontrado."}, status=404)
+
+    for portafolio in portafolios:
         data_portafolio = {
             "datos": []
         }
